@@ -12,4 +12,4 @@ void DECrossover(vector<Solution> &, vector<Solution> & , double , std::vector<d
 void PolynominalMutation(Solution &, double crossoverprobability, double crossoverDistributionIndex);
 
 
-void CrossoverMutation(Solution &solution, Solution &two, double mutationProbability);
+void CrossoverMutation(Solution &solution, Solution &two, double ,double);

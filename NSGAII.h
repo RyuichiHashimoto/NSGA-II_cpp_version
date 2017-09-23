@@ -11,13 +11,13 @@ class NSGAII{
 protected:
 	bool normConstrain_ = false;
 	const char DIRECTORYDEMILITER = '/';
-	int evaluation_ = 0;
-	int maxEvaluations = 40000;
-	int populationSize = 100;
-	double CrossoverProbablity = 0.0;;
-	double CrossoverDistribution = 0.0;
-	double MutationProbablity = 0.0;
-	double MutationDistribution = 0.0;
+	int evaluation_;
+	int maxEvaluations;
+	int populationSize;
+	double CrossoverProbablity;
+	double CrossoverDistribution;
+	double MutationProbablity; 
+	double MutationDistribution;
 	bool   isMAX_ = false;
 	Setting setting_;
 	void Sort(Population &, int,int, int);

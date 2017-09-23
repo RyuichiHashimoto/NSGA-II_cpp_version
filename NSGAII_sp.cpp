@@ -165,12 +165,11 @@ void NSGAII_sp::execute(int time) {
 
 	int generation = 0;
 
-/*	population_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
+	population_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
 	population_.SubscriptFeasibeObjectiveToFile(directory + "/FeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
 	population_.SubscriptInFeasibeObjectiveToFile(directory + "/InFeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
 	population_.NormalizationWithConstrain(isMAX_);
 	population_.SubscriptFunakoshiStyle(time, directory + "/FUNAKOSHISTYLE/" + to_string(time) + "_" + to_string(generation) + "gen.dat");
-	*/
 
 	//population_.NormalizationWithConstrain(isMAX_);
 	do {
@@ -182,13 +181,13 @@ void NSGAII_sp::execute(int time) {
 		Population merge_(populationSize * 2);
 		
 		merge_.merge(population_);
+		
+//		offSpring_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
+//		offSpring_.SubscriptVariablesToFile(directory + "/ALLVAR/InitialVAR" + to_string(generation) + ".dat");
+		offSpring_.SubscriptFeasibeObjectiveToFile(directory + "/FeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
+		offSpring_.SubscriptInFeasibeObjectiveToFile(directory + "/InFeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
 
-/*
-		population_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
-		population_.SubscriptVariablesToFile(directory + "/ALLVAR/InitialVAR" + to_string(generation) + ".dat");
-		population_.SubscriptFeasibeObjectiveToFile(directory + "/FeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
-		population_.SubscriptInFeasibeObjectiveToFile(directory + "/InFeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
-*/
+
 		population_.SubscriptFunakoshiStyle(time, directory + "/FUNAKOSHISTYLE/" + to_string(time) + "_" + to_string(generation) + "gen.dat");
 
 		merge_.merge(offSpring_);
@@ -197,15 +196,15 @@ void NSGAII_sp::execute(int time) {
 
 	} while (flag);
 
-	generation++;
 
-	population_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
-	population_.SubscriptVariablesToFile(directory + "/ALLVAR/InitialVAR" + to_string(generation) + ".dat");
-	population_.SubscriptFeasibeObjectiveToFile(directory + "/FeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
-	population_.SubscriptInFeasibeObjectiveToFile(directory + "/InFeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
+	generation++;
+//	population_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
+//	population_.SubscriptVariablesToFile(directory + "/ALLVAR/InitialVAR" + to_string(generation) + ".dat");
+	population_.SubscriptFeasibeObjectiveToFile(directory + "/FeasibleFUN/FinalFUN" + to_string(generation) + ".dat");
+//	population_.SubscriptInFeasibeObjectiveToFile(directory + "/InFeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
 
 	
-	population_.SubscriptFunakoshiStyle(time, directory + "/FUNAKOSHISTYLE/" + to_string(time) + "_" + to_string(generation) + "gen.dat");
+//	population_.SubscriptFunakoshiStyle(time, directory + "/FUNAKOSHISTYLE/" + to_string(time) + "_" + to_string(generation) + "gen.dat");
 
 
 }

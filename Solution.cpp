@@ -278,13 +278,29 @@ void Solution::configFisibleSolution() {
 		if (Constrain_[i] >= 0) {
 			numberOfFeasibleConstrain++;
 		} else {
+			Violation_ -= Constrain_[i];			
+		}
+	}
+
+	if (numberOfFeasibleConstrain == NumberOfConstrain) {
+		Fiesible_ = true;
+	}
+/*
+	Violation_ = 0;
+	Fiesible_ = false;
+	numberOfFeasibleConstrain = 0;
+	for (int i = 0; i < NumberOfConstrain; i++) {
+		if (Constrain_[i] >= 1.0E-14) {
+			numberOfFeasibleConstrain++;
+		}
+		else {
 			Violation_ -= Constrain_[i];
-			
 		}
 	}
 	if (numberOfFeasibleConstrain == NumberOfConstrain) {
 		Fiesible_ = true;
 	}
+	*/
 }
 
 

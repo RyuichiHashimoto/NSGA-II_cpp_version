@@ -112,12 +112,11 @@ void PolynominalMutation(Solution &solution,double mutationProbability,double di
 	double pro = mutationProbability;
 	double distributionIndex_ = distributionIndex;
 	int NumberOfVariables = solution.getNumberOfVariables();
-	pro = pro >= 0 ? pro : -1.0 * pro / NumberOfVariables;
+	pro = pro >= 0 ? pro : -1.0 * pro / NumberOfVariables;	
 	double rnd, delta1, delta2, mut_pow, deltaq;
 	double y, yl, yu, val, xy;
 	for (int var = 0; var < NumberOfVariables; var++) {
 		if (nextDoubleII() <= pro) {
-			//		cout << var << "	";
 			y = solution.getValue(var);
 			yl = solution.getLowerLimit(var);
 			yu = solution.getUpperLimit(var);
@@ -142,7 +141,8 @@ void PolynominalMutation(Solution &solution,double mutationProbability,double di
 				y = yu;
 			solution.setValue(var, y);
 		}
-	} 
+	}
+
 }
 
 
@@ -183,6 +183,8 @@ void DECrossover(vector<Solution> &parents, vector<Solution> &offSpring, double 
 
 void CrossoverMutation(Solution &solution,Solution &otherSolution,double mutationProbability,double para){
 	double probability = mutationProbability;
+	int numberOfVariables = otherSolution.getNumberOfVariables();
+	probability = probability > 0 ? probability : -1.0 * probability / numberOfVariables;
 	double distributionIndex_ = para;
 	double x1 = 0.0;
 	double x2 = 0.0;
@@ -193,7 +195,6 @@ void CrossoverMutation(Solution &solution,Solution &otherSolution,double mutatio
 	double beta;
 	double betaq;
 	double alpha;
-	int numberOfVariables = otherSolution.getNumberOfVariables();
 	if (nextDoubleIE() <= 1) {
 		for (int i = 0; i<numberOfVariables; i++) {
 			if (nextDoubleIE() <= probability) {
@@ -242,28 +243,28 @@ void CrossoverMutation(Solution &solution,Solution &otherSolution,double mutatio
 
 					if (nextDoubleIE() <0.5) {
 						solution.setValue(i, c1);
-						otherSolution.setValue(i, c2);
+//						otherSolution.setValue(i, c2);
 					}
 					else {
 						solution.setValue(i, c2);
-						otherSolution.setValue(i, c1);
+//						otherSolution.setValue(i, c1);
 					}
 				}
 				else {
 					solution.setValue(i, solution.getValue(i));
-					otherSolution.setValue(i, otherSolution.getValue(i));
+//					otherSolution.setValue(i, otherSolution.getValue(i));
 				}
 			}
 			else {
 				solution.setValue(i, solution.getValue(i));
-				otherSolution.setValue(i, otherSolution.getValue(i));
+//				otherSolution.setValue(i, otherSolution.getValue(i));
 			}
 		}
 	}
 	else {
 		for (int i = 0; i<numberOfVariables; i++) {
 			solution.setValue(i, solution.getValue(i));
-			otherSolution.setValue(i, otherSolution.getValue(i));
+//			otherSolution.setValue(i, otherSolution.getValue(i));
 		}
 	}
 }

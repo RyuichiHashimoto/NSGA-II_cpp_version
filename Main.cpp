@@ -8,7 +8,8 @@
 #include"Ranking.h"
 #include"Setting.h"
 #include"Island.h"
-
+#include"OCIsland.h"
+#include"OCWMIsland.h"
 
 int  main(int argc,char** argv){
 	int seed;
@@ -24,6 +25,7 @@ int  main(int argc,char** argv){
 	string pname = setting.getAsStr("Problem");
 	string AlgorithmName = setting.getAsStr("AlgorithmName");
 	Problem *p;
+
 
 	for(int i=0;i<trial_ ;i++){		
 
@@ -50,9 +52,14 @@ int  main(int argc,char** argv){
 			island = new Island(p, setting);
 			island->execute(nowTrial + i);
 		}
-		else if (AlgorithmName == "Island") {
-			Island *island;
-			island = new Island(p, setting);
+		else if (AlgorithmName == "OCIsland") {
+			OCIsland *island;
+			island = new OCIsland(p, setting);
+			island->execute(nowTrial + i);
+		}
+		else if (AlgorithmName == "OCWMIsland") {
+			OCWMIsland *island;
+			island = new OCWMIsland(p, setting);
 			island->execute(nowTrial + i);
 		}
 
@@ -84,6 +91,9 @@ void NSGAII::config() {
 	Solution a(2);
 	Population pop(30);
 
+	a.setObjective(0, 18);
+	a.setObjective(1, 18);
+	pop.add(a);
 	a.setObjective(0, 18);
 	a.setObjective(1, 18);
 	pop.add(a);
@@ -144,6 +154,15 @@ void NSGAII::config() {
 	a.setObjective(0, 10);
 	a.setObjective(1, 2);
 	pop.add(a);
+	a.setObjective(0, 10);
+	a.setObjective(1, 2);
+	pop.add(a);
+	a.setObjective(0, 10);
+	a.setObjective(1, 2);
+	pop.add(a);
+	a.setObjective(0, 2);
+	a.setObjective(1, 2);
+	pop.add(a);
 
 	
 	vector<Population> d = RankingForConstrain(pop, false);
@@ -157,7 +176,8 @@ void NSGAII::config() {
 		cout << endl;
 
 	}
-
+	int string_ = 0;
+	cin >> string_;
 
 	//pop.SubscriptAllObjective();
 

@@ -1,5 +1,6 @@
 #include"Population.h"
 #include"Solution.h"
+#include"misc.h"
 #include<cassert>
 #include<iostream>
 #include<fstream>
@@ -251,20 +252,22 @@ void Population::SubscriptInFeasibeObjectiveToFile(const std::string &path) {
 }
 
 void Population::SubscriptFunakoshiStyle(int d,const std::string &path){
-	ofstream output(path);
-
-	output << "#gen" << DEMILITER << "Feasible" << DEMILITER << "f" << to_string(1) << DEMILITER << "f" << to_string(2) << DEMILITER;	
-
 	int numberOfConstraint = population_[0].getNumberOfConstraint();
 	int numberOfVariables = population_[0].getNumberOfVariables();
-	for (int i = 0; i < numberOfConstraint; i++) {
-		output << "c" << to_string(i) << DEMILITER;
-	}
-	for (int i = 0; i < numberOfVariables - 1; i++) {
-		output << "x" << to_string(i + 1) << DEMILITER;
-	}
-	output << "x" << to_string(numberOfVariables - 1) << endl;
+	if (!checkFileExistence(path)) {
+		ofstream output(path, ios::app);
 
+		output << "#gen" << DEMILITER << "Feasible" << DEMILITER << "f" << to_string(1) << DEMILITER << "f" << to_string(2) << DEMILITER;
+		for (int i = 0; i < numberOfConstraint; i++) {
+			output << "c" << to_string(i) << DEMILITER;
+		}
+		for (int i = 0; i < numberOfVariables - 1; i++) {
+			output << "x" << to_string(i + 1) << DEMILITER;
+		}
+		output << "x" << to_string(numberOfVariables - 1) << endl;
+	
+	}
+	ofstream output(path, ios::app);
 
 	for (int popnum = 0; popnum < populationSize_; popnum++) {
 		output << to_string(d) << DEMILITER;

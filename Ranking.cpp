@@ -186,7 +186,6 @@ int CompareTwoSolution_NDS(Solution &one, Solution &two, bool isMAX_) {
 		else {
 			return 0;
 		}
-
 	}
 	else {
 		ErrorMassage("ÇªÇÒÇ»èÛë‘ÇÕÇ»Ç¢");
@@ -273,7 +272,6 @@ vector<Population> RankingForConstrain(Population &mg, bool isMAX) {
 	F_all.push_back(F_i);
 	while (F_i.size() != 0) {
 		Q.clear();
-
 		for (int j = 0; j < F_i.size(); j++) {
 			int p = F_i[j];
 			std::vector<int> Sp(Sp_all[p]);
