@@ -2,7 +2,7 @@
 #include"Problem.h"
 #include"NSGAII.h"
 #include<map>
-#include"NSGAII_sp.h"
+#include"MyNSGAII_sp.h"
 #include"ProblemToolbox.h"
 #include"MT.h"
 #include"Ranking.h"

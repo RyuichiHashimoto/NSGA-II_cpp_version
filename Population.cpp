@@ -302,7 +302,12 @@ void Population::Normalization(bool isMAX_){
 	for (int i = 0; i<populationSize_ ; i++) {
 		vector<double> value_ = population_[i].getObjective();
 		for (int ja = 0; ja < max.size(); ja++) {
-			population_[i].setNormalizeObjective(ja, (value_[ja] - min[ja]) / (max[ja] - min[ja]));
+			if(fabs(max[ja] - min[ja])>1.0E-6){
+				population_[i].setNormalizeObjective(ja, (value_[ja] - min[ja]) / (max[ja] - min[ja]));
+			}
+			else {
+				ErrorMassage("shuuseihituyou");
+			}
 		}
 	}
 }
@@ -343,6 +348,18 @@ void Population::NormalizationWithConstrain(bool isMAX_) {
 */
 	int Objectives = population_[0].getNumberOfObjectives();
 	double ration = CalcRationOfFiesibleSolution();
+
+
+	for (int p = 0; p < populationSize_; p++) {
+		for (int o = 0; o < Objectives; o++) {
+			double d = population_[p].getNormalizationObjective(o) *(ration) +( 1 - ration )*population_[p].getV_max();
+			population_[p].setNormalizationWithConstrainNorm(o, d);
+		}
+	}
+	return;
+
+
+
 	//0‚È‚ç‹——£•Ï”‚ÍV_max‚Æ‚È‚é(‚Â‚Ü‚è§–ñ‚Ì‚Ý‚ð‚Ý‚é)	
 	if (fabs(ration) <1.0E-14) {
 		for (int p = 0; p < populationSize_; p++) {

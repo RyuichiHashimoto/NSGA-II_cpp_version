@@ -65,7 +65,7 @@ Problem* getProblem(string  name, Setting &map){
 		ret = new DTLZ7(numberOfVariables, numberofObjectieves);
 	}
 	else if (name == "mazda" || name == "MAZDA") {
-		ret = new mazda();
+		ret = new mazda(map);
 	} /*else if (name == "WFG1") {
 		ret = new WFG1(numberOfVariables, numberofObjectieves);
 	} else if (name == "WFG2") {
