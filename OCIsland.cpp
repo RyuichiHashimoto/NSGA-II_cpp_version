@@ -271,7 +271,8 @@ void OCIsland::selectNSGAIIsp(Population &currentPopulation, Population &child) 
 	for (int i = 0; i < child.size(); i++) {
 		merge.add(child.get(i));
 	}
-	merge.NormalizationWithConstrain(isMAX_);
+	double rf = merge.CalcRationOfFiesibleSolution();
+	merge.NormalizationWithConstrain(isMAX_,rf);
 	vector<Population> ranking = RankingForConstrainNSGAIIsp(merge, isMAX_);
 
 	//	vector<Population> ranking = RankingForConstrain(merge_, isMAX_);

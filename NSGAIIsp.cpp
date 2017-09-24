@@ -5,11 +5,11 @@
 #include<direct.h>
 #include"Setting.h"
 #include<sstream>
-#include"MyNSGAII_sp.h"
+#include"NSGAIIsp.h"
 #include"Misc.h"
 #include"Setting.h"
 
-void NewNSGAII_sp::initialization() {
+void NSGAIIsp::initialization() {
 	for (int i = 0; i < populationSize; i++) {
 		Solution a(problem);
 		problem->repair(a);
@@ -20,20 +20,20 @@ void NewNSGAII_sp::initialization() {
 }
 
 
-NewNSGAII_sp::NewNSGAII_sp(Problem *d, Setting &test) {
+NSGAIIsp::NSGAIIsp(Problem *d, Setting &test) {
 	problem = d;
 	setting_ = test;
 }
 
 
-void NewNSGAII_sp::setting(int d) {
+void NSGAIIsp::setting(int d) {
 	evaluation_ = 0;
 	maxEvaluations = setting_.getAsInt("maxEvaluation");
 	cout << maxEvaluations;
 	populationSize = setting_.getAsInt("populationSize");
 	population_ = Population(populationSize);
 	offSpring_ = Population(populationSize);
-	directory = "result/NewNSGAII_sp/" + problem->getName() + "/" + to_string(problem->getNumberOfObjective()) + "OBJ/" + to_string(d);
+	directory = "result/NSGAIIsp/" + problem->getName() + "/" + to_string(problem->getNumberOfObjective()) + "OBJ/" + to_string(d);
 	CrossoverProbablity = setting_.getAsDouble("CrossoverProbability");
 	CrossoverDistribution = setting_.getAsDouble("CrossoverDistribution");
 	MutationProbablity = setting_.getAsDouble("MutationProbability");
@@ -47,7 +47,7 @@ void NewNSGAII_sp::setting(int d) {
 }
 
 
-bool NewNSGAII_sp::makeOffSpring() {
+bool NSGAIIsp::makeOffSpring() {
 	offSpring_ = Population(populationSize);
 	for (int i = 0; i < populationSize; i++) {
 		vector<Solution> offSpring(2);
@@ -72,17 +72,17 @@ bool NewNSGAII_sp::makeOffSpring() {
 		if (evaluation_ == maxEvaluations) {
 			return false;
 		}
-		
-/*
+
+		/*
 		PolynominalMutation(offSpring[1], MutationProbablity, MutationDistribution);
 		problem->repair(offSpring[1]);
 		problem->evaluate(offSpring[1]);
 		offSpring_.add(offSpring[1]);
 		evaluation_++;
 		if (evaluation_ == maxEvaluations) {
-			return false;
+		return false;
 		}
-*/
+		*/
 	}
 	return true;
 
@@ -90,7 +90,7 @@ bool NewNSGAII_sp::makeOffSpring() {
 }
 
 
-void NewNSGAII_sp::MakeDirectory() {
+void NSGAIIsp::MakeDirectory() {
 	cout << directory << endl;;
 	MakeDirectory(directory + "/Setting");
 	MakeDirectory(directory + "/ALLFUN");
@@ -102,7 +102,7 @@ void NewNSGAII_sp::MakeDirectory() {
 	MakeDirectory(directory + "/FUNAKOSHISTYLE");
 }
 
-void NewNSGAII_sp::MakeDirectory(string name) {
+void NSGAIIsp::MakeDirectory(string name) {
 	vector<string > v = split(name, DIRECTORYDEMILITER);
 	string f = v[0];
 	_mkdir(f.c_str());
@@ -113,7 +113,7 @@ void NewNSGAII_sp::MakeDirectory(string name) {
 		f += DIRECTORYDEMILITER;
 	}
 }
-int NewNSGAII_sp::binaryTounament() {
+int NSGAIIsp::binaryTounament() {
 
 	int one = genrand_int32() % population_.size();
 	int two = genrand_int32() % population_.size();
@@ -128,7 +128,7 @@ int NewNSGAII_sp::binaryTounament() {
 		return two;
 	}
 }
-int NewNSGAII_sp::compare(const Solution &one, const Solution &two) {
+int NSGAIIsp::compare(const Solution &one, const Solution &two) {
 
 	if (one.getRank() < two.getRank()) {
 		return 1;
@@ -154,7 +154,7 @@ int NewNSGAII_sp::compare(const Solution &one, const Solution &two) {
 }
 
 
-void NewNSGAII_sp::execute(int time) {
+void NSGAIIsp::execute(int time) {
 
 	bool flag;
 
@@ -168,22 +168,22 @@ void NewNSGAII_sp::execute(int time) {
 	population_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
 	population_.SubscriptFeasibeObjectiveToFile(directory + "/FeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
 	population_.SubscriptInFeasibeObjectiveToFile(directory + "/InFeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
-//	population_.NormalizationWithConstrain(isMAX_,population_.get);
+//	population_.NormalizationWithConstrain(isMAX_);
 	population_.SubscriptFunakoshiStyle(time, directory + "/FUNAKOSHISTYLE/" + to_string(time) + "_" + to_string(generation) + "gen.dat");
 
 	//population_.NormalizationWithConstrain(isMAX_);
 	do {
 		cout << ++generation << "gen" << endl;
 		flag = makeOffSpring();
-		double rf = population_.CalcRationOfFiesibleSolution();
+
 		//offSpring_.NormalizationWithConstrain(isMAX_);
-		
+
 		Population merge_(populationSize * 2);
-		
+
 		merge_.merge(population_);
-		
-//		offSpring_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
-//		offSpring_.SubscriptVariablesToFile(directory + "/ALLVAR/InitialVAR" + to_string(generation) + ".dat");
+
+		//		offSpring_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
+		//		offSpring_.SubscriptVariablesToFile(directory + "/ALLVAR/InitialVAR" + to_string(generation) + ".dat");
 		offSpring_.SubscriptFeasibeObjectiveToFile(directory + "/FeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
 		offSpring_.SubscriptInFeasibeObjectiveToFile(directory + "/InFeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
 		offSpring_.SubscriptFunakoshiStyle(time, directory + "/FUNAKOSHISTYLE/" + to_string(time) + "_" + to_string(generation) + "gen.dat");
@@ -191,32 +191,33 @@ void NewNSGAII_sp::execute(int time) {
 
 		merge_.merge(offSpring_);
 
-		selectEnvironment(merge_,rf);
+		selectEnvironment(merge_);
 
 
 	} while (flag);
 
 
 	generation++;
-//	population_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
-//	population_.SubscriptVariablesToFile(directory + "/ALLVAR/InitialVAR" + to_string(generation) + ".dat");
+	//	population_.SubscriptObjectiveToFile(directory + "/ALLFUN/InitialFUN" + to_string(generation) + ".dat");
+	//	population_.SubscriptVariablesToFile(directory + "/ALLVAR/InitialVAR" + to_string(generation) + ".dat");
 	population_.SubscriptFeasibeObjectiveToFile(directory + "/FeasibleFUN/FinalFUN" + to_string(generation) + ".dat");
-//	population_.SubscriptInFeasibeObjectiveToFile(directory + "/InFeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
+	//	population_.SubscriptInFeasibeObjectiveToFile(directory + "/InFeasibleFUN/InitialFUN" + to_string(generation) + ".dat");
 
-	
-//	population_.SubscriptFunakoshiStyle(time, directory + "/FUNAKOSHISTYLE/" + to_string(time) + "_" + to_string(generation) + "gen.dat");
+
+	//	population_.SubscriptFunakoshiStyle(time, directory + "/FUNAKOSHISTYLE/" + to_string(time) + "_" + to_string(generation) + "gen.dat");
 
 
 }
 
 
 
-void NewNSGAII_sp::selectEnvironment(Population &merge_,double rf) {
+void NSGAIIsp::selectEnvironment(Population &merge_) {
+	double rf = merge_.CalcRationOfFiesibleSolution();
 	merge_.NormalizationWithConstrain(isMAX_,rf);
 	vector<Population> ranking = RankingForConstrainNSGAIIsp(merge_, isMAX_);
-//	vector<Population> ranking = RankingForConstrain(merge_, isMAX_);
+	//	vector<Population> ranking = RankingForConstrain(merge_, isMAX_);
 
-	population_.clear();	
+	population_.clear();
 	int rank = 0;
 	while (population_.size() + ranking[rank].size() < populationSize) {
 		CrowdingDistance(ranking[rank]);
@@ -246,14 +247,14 @@ void NewNSGAII_sp::selectEnvironment(Population &merge_,double rf) {
 
 }
 
-void NewNSGAII_sp::SortCrowding(Population &d, int left, int right) {
+void NSGAIIsp::SortCrowding(Population &d, int left, int right) {
 	for (int i = 0; i < d.size(); i++) {
 		for (int ja = d.size() - 1; ja >= i; ja--) {
 			if (compare(d.get(i), d.get(ja)) == -1) {
 				std::swap(d.get(i), d.get(ja));
 			}
 		}
-}
+	}
 
 
 	/*	if (left >= right){
@@ -285,7 +286,7 @@ void NewNSGAII_sp::SortCrowding(Population &d, int left, int right) {
 	*/
 }
 /*
-void NewNSGAII_sp::Sort(Population &d, int objective, int left, int right) {
+void NSGAIIsp::Sort(Population &d, int objective, int left, int right) {
 
 int i = left;
 int j = right;
@@ -313,7 +314,7 @@ Sort(d,objective, j + 1, right);
 */
 
 
-int NewNSGAII_sp::compareCrowdingWithNormalize(const Solution &a, const  Solution &b, int Objective) {
+int NSGAIIsp::compareCrowdingWithNormalize(const Solution &a, const  Solution &b, int Objective) {
 	if (b.getNormalizationWithConstrainNorm(Objective) > a.getNormalizationWithConstrainNorm(Objective)) {
 		return 1;
 	}
@@ -332,25 +333,25 @@ int NewNSGAII_sp::compareCrowdingWithNormalize(const Solution &a, const  Solutio
 
 /*
 
-int NewNSGAII_sp::compareCrowding(const Solution &a, const  Solution &b, int Objective) {
-	if (b.getObjective(Objective) > a.getObjective(Objective)) {
-		return 1;
-	}
-	else if (b.getObjective(Objective) < a.getObjective(Objective)) {
-		return -1;
-	}
-	if (a.getID() > b.getID()) {
-		return 1;
-	}
-	else if (a.getID() < b.getID()) {
-		return -1;
-	}
+int NSGAIIsp::compareCrowding(const Solution &a, const  Solution &b, int Objective) {
+if (b.getObjective(Objective) > a.getObjective(Objective)) {
+return 1;
+}
+else if (b.getObjective(Objective) < a.getObjective(Objective)) {
+return -1;
+}
+if (a.getID() > b.getID()) {
+return 1;
+}
+else if (a.getID() < b.getID()) {
+return -1;
+}
 
-	return 0;
+return 0;
 };
 */
 
-void NewNSGAII_sp::Sort(Population &d, int objective, int left, int right) {
+void NSGAIIsp::Sort(Population &d, int objective, int left, int right) {
 
 	int i = left;                      /* ソートする配列の一番小さい要素の添字 */
 	int j = right;                     /* ソートする配列の一番大きい要素の添字 */
@@ -377,7 +378,7 @@ void NewNSGAII_sp::Sort(Population &d, int objective, int left, int right) {
 }
 
 
-void NewNSGAII_sp::CrowdingDistance(Population &a) {
+void NSGAIIsp::CrowdingDistance(Population &a) {
 	for (int i = 0; i< a.size(); i++) {
 		a.get(i).setCrowdingDistance(0.0);
 	}

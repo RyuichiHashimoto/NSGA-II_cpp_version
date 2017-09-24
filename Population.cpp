@@ -338,7 +338,7 @@ void Population::CalcV_max(){
 	}
 }
 
-void Population::NormalizationWithConstrain(bool isMAX_) {
+void Population::NormalizationWithConstrain(bool isMAX_, double rf) {
 	Normalization(isMAX_);
 	// V_max = (êßñÒà·îΩó ÇÃëçòa)/(ç≈ëÂêßñÒà·îΩó *êßñÒêî)
 	CalcV_max();
@@ -348,17 +348,20 @@ void Population::NormalizationWithConstrain(bool isMAX_) {
 */
 	int Objectives = population_[0].getNumberOfObjectives();
 	double ration = CalcRationOfFiesibleSolution();
-
-
+		
+	ration = rf;
+	/*
 	for (int p = 0; p < populationSize_; p++) {
 		for (int o = 0; o < Objectives; o++) {
 			double d = population_[p].getNormalizationObjective(o) *(ration) +( 1 - ration )*population_[p].getV_max();
 			population_[p].setNormalizationWithConstrainNorm(o, d);
 		}
 	}
-	return;
 
 
+	return ;
+
+	*/
 
 	//0Ç»ÇÁãóó£ïœêîÇÕV_maxÇ∆Ç»ÇÈ(Ç¬Ç‹ÇËêßñÒÇÃÇ›ÇÇ›ÇÈ)	
 	if (fabs(ration) <1.0E-14) {

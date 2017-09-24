@@ -10,6 +10,7 @@
 #include"Island.h"
 #include"OCIsland.h"
 #include"OCWMIsland.h"
+#include"NSGAIIsp.h"
 
 int  main(int argc,char** argv){
 	int seed;
@@ -41,11 +42,18 @@ int  main(int argc,char** argv){
 			delete nsgaii;
 		}
 		else if (AlgorithmName == "NSGAII_sp") {
-			NSGAII_sp* nsgaii_sp;
-			nsgaii_sp = new NSGAII_sp(p, setting);
-			nsgaii_sp->execute(nowTrial + i);
+			NSGAIIsp* nsgaiisp;
+			nsgaiisp = new NSGAIIsp(p, setting);
+			nsgaiisp->execute(nowTrial + i);
 			delete p;
-			delete nsgaii_sp;
+			delete nsgaiisp;
+		}
+		else if (AlgorithmName == "NewNSGAII_sp") {
+			NewNSGAII_sp* nsgaiisp;
+			nsgaiisp = new NewNSGAII_sp(p, setting);
+			nsgaiisp->execute(nowTrial + i);
+			delete p;
+			delete nsgaiisp;
 		}
 		else if (AlgorithmName == "Island") {
 			Island *island;

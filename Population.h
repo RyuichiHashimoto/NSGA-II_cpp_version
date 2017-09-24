@@ -39,7 +39,7 @@ public:
 	void NormalizationConstrain();
 	void CalcV_max();
 	void Normalization(bool );
-	void NormalizationWithConstrain(bool );
+	void NormalizationWithConstrain(bool , double );
 	void SubscriptObjectiveToFile(const  std::string &);
 	void SubscriptVariablesToFile(const std::string &);
 	void SubscriptConstrainToFile(const std::string &);

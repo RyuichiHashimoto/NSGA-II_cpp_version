@@ -5,7 +5,7 @@
 #include"Setting.h"
 
 
-class NewNSGAII_sp {
+class NSGAIIsp {
 protected:
 	char DIRECTORYDEMILITER = '/';
 	int evaluation_ = 0;
@@ -29,10 +29,10 @@ protected:
 	Population population_;
 	Population offSpring_;
 	string directory;
-//	int    compareCrowding(const Solution &, const  Solution &, int);
-	
+	//	int    compareCrowding(const Solution &, const  Solution &, int);
+
 public:
-	NewNSGAII_sp(Problem *, Setting &);
+	NSGAIIsp(Problem *, Setting &);
 	void config();
 	void setting(int);
 	void execute(int time);
@@ -41,6 +41,6 @@ public:
 	void calc_dis();
 	bool makeOffSpring();
 	int compare(const Solution &, const Solution &);
-	int compareCrowdingWithNormalize(const Solution &, const Solution &,int);
-	void selectEnvironment(Population &merge,double);
+	int compareCrowdingWithNormalize(const Solution &, const Solution &, int);
+	void selectEnvironment(Population &merge);
 };
