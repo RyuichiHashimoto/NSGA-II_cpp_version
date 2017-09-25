@@ -29,7 +29,7 @@
 
 //// Toolkit includes. //////////////////////////////////////////////////////
 
-#include "Misc.h"
+#include "MiscWFG.h"
 #include "TransFunctions.h"
 
 

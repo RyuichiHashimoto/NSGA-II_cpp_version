@@ -1,11 +1,12 @@
 #include"WFG.h"
 
-WFG::WFG(int k, int  l, int  M) {
+WFGProblem::WFGProblem(int k, int  l, int  M) {
 	k_ = k;
 	l_ = l;
 	M_ = M;
 	numberOfValue_ = k_ + l_;
 	numberOfObjective_ = M_;
+	problemname_ = "WFGProblem";
 
 	LowerLimit_.resize(numberOfValue_);
 	UpperLimit_.resize(numberOfValue_);
@@ -14,14 +15,36 @@ WFG::WFG(int k, int  l, int  M) {
 		LowerLimit_[var] = 0;
 		UpperLimit_[var] = 2 * (var + 1);
 	}
+	for (int var = 0; var < numberOfValue_; var++) {
+		LowerLimit_[var] = 0;
+		UpperLimit_[var] = 2 * (var + 1);
+	}
+
+	SolutionType_ = 2;
+} // WFGProblem
+
+WFGProblem::WFGProblem() {
+	k_ = 10;
+	l_ = 10;
+	M_ = 4;
+	numberOfValue_ = k_ + l_;
+	numberOfObjective_ = M_;
+	problemname_ = "WFGProblem";
+	LowerLimit_.resize(numberOfValue_);
+	UpperLimit_.resize(numberOfValue_);
 
 	for (int var = 0; var < numberOfValue_; var++) {
 		LowerLimit_[var] = 0;
 		UpperLimit_[var] = 2 * (var + 1);
 	}
-} // WFG
+	for (int var = 0; var < numberOfValue_; var++) {
+		LowerLimit_[var] = 0;
+		UpperLimit_[var] = 2 * (var + 1);
+	}
+	SolutionType_ = 2;
+}
 
-std::vector<double>  WFG::calculate_x(std::vector<double>  t){
+std::vector<double>  WFGProblem::calculate_x(std::vector<double>  t){
 	std::vector<double>  x(M_);
 
 	for (int i = 0; i < M_ - 1; i++) {
@@ -33,7 +56,7 @@ std::vector<double>  WFG::calculate_x(std::vector<double>  t){
 	return x;
 } // calculate_x
 
-std::vector<double>  WFG::normalise(std::vector<double>  z) {
+std::vector<double>  WFGProblem::normalise(std::vector<double>  z) {
 	std::vector<double>  result(z.size());
 	for (int i = 0; i < z.size(); i++) {
 		double bound = (double)2.0 * (i + 1);
@@ -44,7 +67,7 @@ std::vector<double>  WFG::normalise(std::vector<double>  z) {
 	return result;
 } // normalize
 
-double WFG::correct_to_01(double a) {
+double WFGProblem::correct_to_01(double a) {
 	double min = (double)0.0;
 	double max = (double)1.0;
 

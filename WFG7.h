@@ -2,13 +2,13 @@
 #include"Problem.h"
 #include"WFG.h"
 
-class WFG1Problem : public WFGProblem {
+class WFG7Problem : public WFGProblem {
 private:
 
 public:
-	WFG1Problem();
-	WFG1Problem(int, int,int);
-	~WFG1Problem();
+	WFG7Problem();
+	WFG7Problem(int, int,int);
+	~WFG7Problem();
 
 	void evaluate(Solution &);
 	void repair(Solution  &);

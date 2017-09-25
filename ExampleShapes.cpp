@@ -38,7 +38,7 @@
 
 #include "ShapeFunctions.h"
 #include "FrameworkFunctions.h"
-#include "Misc.h"
+#include "MiscWFG.h"
 
 
 //// Used namespaces. ///////////////////////////////////////////////////////

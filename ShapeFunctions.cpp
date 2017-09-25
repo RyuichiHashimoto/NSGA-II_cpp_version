@@ -30,7 +30,7 @@
 
 //// Toolkit includes. //////////////////////////////////////////////////////
 
-#include "Misc.h"
+#include "MiscWFG.h"
 #include "Misc.h"
 
 

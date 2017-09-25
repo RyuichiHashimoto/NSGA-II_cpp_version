@@ -8,6 +8,16 @@
 #include"DTLZ5.h"
 #include"DTLZ6.h"
 #include"DTLZ7.h"
+#include"WFG1.h"
+#include"WFG2.h"
+#include"WFG3.h"
+#include"WFG4.h"
+#include"WFG5.h"
+#include"WFG6.h"
+#include"WFG7.h"
+#include"WFG8.h"
+#include"WFG9.h"
+
 #include"Setting.h"
 #include<iostream>
 #include"MAZDA.h"
@@ -66,28 +76,27 @@ Problem* getProblem(string  name, Setting &map){
 	}
 	else if (name == "mazda" || name == "MAZDA") {
 		ret = new mazda(map);
-	} /*else if (name == "WFG1") {
-		ret = new WFG1(numberOfVariables, numberofObjectieves);
+	} else if (name == "WFG1") {
+		ret = new WFG1Problem(map.getAsInt("WFG_k"), map.getAsInt("WFG_l"), numberofObjectieves);
 	} else if (name == "WFG2") {
-		ret = new WFG2(numberOfVariables, numberofObjectieves);
+		ret = new WFG2Problem(map.getAsInt("WFG_k"), map.getAsInt("WFG_l"), numberofObjectieves);
 	}else if (name == "WFG3") {
-		ret = new WFG3(numberOfVariables, numberofObjectieves);
-	}
-	else if (name == "WFG4") {
-	ret = new WFG4(numberOfVariables, numberofObjectieves);
-	}else if (name == "WFG5) {
-		ret = new WFG5(numberOfVariables, numberofObjectieves);
+		ret = new WFG3Problem(map.getAsInt("WFG_k"), map.getAsInt("WFG_l"), numberofObjectieves);
+	}else if (name == "WFG4") {
+		ret = new WFG4Problem(map.getAsInt("WFG_k"), map.getAsInt("WFG_l"), numberofObjectieves);
+	}else if (name == "WFG5") {
+		ret = new WFG5Problem(map.getAsInt("WFG_k"), map.getAsInt("WFG_l"), numberofObjectieves);
 	}else if (name == "WFG6") {
-		ret = new WFG6(numberOfVariables, numberofObjectieves);
+		ret = new WFG6Problem(map.getAsInt("WFG_k"), map.getAsInt("WFG_l"), numberofObjectieves);
 	}else if (name == "WFG7") {
-		ret = new WFG7(numberOfVariables, numberofObjectieves);
+		ret = new WFG7Problem(map.getAsInt("WFG_k"), map.getAsInt("WFG_l"), numberofObjectieves);
 	}else if (name == "WFG8") {
-		ret = new WFG8(numberOfVariables, numberofObjectieves);
+		ret = new WFG8Problem(map.getAsInt("WFG_k"), map.getAsInt("WFG_l"), numberofObjectieves);
 	}else if (name == "WFG9") {
-		ret = new WFG9(numberOfVariables, numberofObjectieves);
+		ret = new WFG9Problem(map.getAsInt("WFG_k"), map.getAsInt("WFG_l"), numberofObjectieves);
 	}
 
-	*/else if(name == "Knapsack") {
+	else if(name == "Knapsack") {
 	//	ret = new Knapsack(numberofObjectieves);
 	}
 

@@ -1,14 +1,11 @@
 #pragma once
-
+#include"Solution.h"
 #include<vector>
 #include<math.h>
 #include <algorithm>
 #include"Problem.h"
-class WFG :public Problem{
+class WFGProblem :public Problem{
 
-	/**
-	* stores a epsilon default value
-	*/
 protected:
 	const double epsilon = (double)1e-7;
 
@@ -25,7 +22,9 @@ protected:
 	
 public:
 
-	WFG(int k, int  l, int  M);
+	WFGProblem();
+
+	WFGProblem(int k, int  l, int  M);
 
 	std::vector<double>  calculate_x(std::vector<double>  t);
 	
@@ -36,7 +35,8 @@ public:
 
 	std::vector<double>  subVector(std::vector<double>  z, int head, int tail);
 
+	virtual void repair(Solution &) = 0;;
 
-	virtual std::vector<double>  evaluate(std::vector<double>  variables) = 0;;
+	virtual void evaluate(Solution &) = 0;;
 	// evaluate
 };

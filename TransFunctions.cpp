@@ -30,11 +30,11 @@
 
 #include <cassert>
 #include <cmath>
-
+#include<Algorithm>
 
 //// Toolkit includes. //////////////////////////////////////////////////////
 
-#include "Misc.h"
+#include "MiscWFG.h"
 
 
 //// Used namespaces. ///////////////////////////////////////////////////////
