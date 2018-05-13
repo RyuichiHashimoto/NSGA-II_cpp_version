@@ -7,3 +7,6 @@ This repository does not include some of the source code file because of complia
 
 ## Data
 15 Mar. 2018
+
+## Author
+Ryuichi Hashimoto
